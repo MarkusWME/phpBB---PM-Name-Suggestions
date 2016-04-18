@@ -1,0 +1,32 @@
+{
+	"name": "pcgf/pmnamesuggestions",
+	"type": "phpbb-extension",
+	"description": "An extension that suggests usernames when selecting a recipient of a private message",
+	"homepage": "https://github.com/MarkusWME/phpBB---PM-Name-Suggestions",
+	"version": "1.0.0",
+	"time": "2016-04-18",
+	"keywords": ["pm", "private message", "recipient", "username", "suggestion"],
+	"license": "GPL-2.0",
+	"authors": [
+		{
+			"name": "MarkusWME",
+			"homepage": "https://github.com/MarkusWME",
+			"email": "markuswme@pcgamingfreaks.at",
+			"role": "Lead Developer"
+		}
+	],
+	"require": {
+		"php": ">=5.3.3"
+	},
+	"extra": {
+		"display-name": "PM Name Suggestions",
+		"soft-require": {
+			"phpbb/phpbb": ">=3.1.*"
+		},
+		"version-check": {
+			"host": "api.pcgf.at",
+			"directory": "/phpbb",
+			"filename": "pmnamesuggestions.json"
+		}
+	}
+}
