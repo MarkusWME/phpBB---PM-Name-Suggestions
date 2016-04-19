@@ -14,7 +14,7 @@
 #pcgf_pmnamesuggestionlist > ul {
 	display: inline-block;
 	list-style: none;
-	margin-bottom: 0px;
+	margin-bottom: 0;
 }
 
 #pcgf_pmnamesuggestionlist > ul > li {

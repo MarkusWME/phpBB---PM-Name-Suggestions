@@ -15,7 +15,8 @@ function hideSuggestions() {
 function setSuggestionPosition() {
 	// Position the suggestion list under the current line of the user list
 	var userListPosition = pcgfUserList.position();
-	var currentLine = pcgfUserList.val().substr(0, pcgfUserList.prop('selectionStart')).split('\n').length;
+	var currentLine = pcgfUserList.val();
+	currentLine = currentLine.substr(0, pcgfUserList.prop('selectionStart')).split('\n').length;
 	pcgfSuggestionList.css({display: 'inline-block', left: userListPosition.left, top: userListPosition.top + (currentLine * parseInt(pcgfUserList.css('line-height'))) + 5});
 }
 
@@ -36,7 +37,7 @@ function setPMName(name) {
 	hideSuggestions();
 }
 
-$(window).resize(function(e) {
+$(window).resize(function() {
 	// Refresh the position of the suggestion list when the screen resizes
     setSuggestionPosition();
 });
@@ -108,7 +109,6 @@ pcgfUserList.on('keydown', function(e) {
 		if (pcgfKeyCatched > 0) {
 			e.preventDefault();
 			e.stopPropagation();
-			return;
 		}
 	}
 });
@@ -139,7 +139,7 @@ pcgfUserList.on('keyup', function(e) {
 					pcgfLastSearchValue = '';
 				} else {
 					// If name is already entered don't show it
-					var singleMatch = null;
+					var singleMatch;
 					var matches = [];
 					var regex = /<li.*?><img.*?\/>(.*?)<\/li>/gi;
 					while ((singleMatch = regex.exec(result))) {
