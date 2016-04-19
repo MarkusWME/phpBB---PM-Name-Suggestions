@@ -7,6 +7,10 @@ A phpBB extension that suggests usernames when selecting a recipient of a privat
 * Display the avatar images of the users
 * Username loading with AJAX
 
+## Supported styles
+* prosilver
+* [Mobbern3.1](http://www.masivotech.com/product/mobbern-phpbb3-phpbb31-responsive-theme/ "Mobbern phpBB responsive theme website")
+
 ## How to install
 To install the extension you have to do the following steps:
 
