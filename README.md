@@ -9,6 +9,7 @@ A phpBB extension that suggests usernames when selecting a recipient of a privat
 
 ## How to install
 To install the extension you have to do the following steps:
+
 1. Copy the /pcgf/ folder into your phpBB extension folder /ext/
 2. Navigate to the ACP to Customize -> Manage extensions
 3. Search the extension under the disabled extensions category and click it's enable link
