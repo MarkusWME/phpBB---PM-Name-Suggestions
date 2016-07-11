@@ -21,7 +21,7 @@
 	"extra": {
 		"display-name": "PM Name Suggestions",
 		"soft-require": {
-			"phpbb/phpbb": ">=3.1.*"
+			"phpbb/phpbb": ">=3.1"
 		},
 		"version-check": {
 			"host": "api.pcgf.at",
