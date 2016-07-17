@@ -38,3 +38,7 @@
 	vertical-align: middle;
 	width: 20px;
 }
+
+.pmlist dd > script {
+	display: none;
+}
