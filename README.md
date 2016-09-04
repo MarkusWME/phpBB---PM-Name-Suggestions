@@ -20,7 +20,7 @@ To install the extension you have to do the following steps:
 
 ## Requirements
 * php 5.3.3 or newer
-* phpBB 3.1.x
+* phpBB 3.1.*
 
 ## External links
 [phpBB extension database](https://www.phpbb.com/customise/db/extension/pmnamesuggestions/ "Show extension entry on phpBB.com")

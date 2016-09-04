@@ -64,22 +64,22 @@ class controller
         if ($this->request->is_ajax())
         {
             // Search if a name is given
-            $search = utf8_strtolower($this->request->variable('search', ''));
+            $search = utf8_normalize_nfc(strtolower($this->request->variable('search', '', true)));
             if (strlen($search) > 0)
             {
                 $user_count = 0;
-                $search = utf8_clean_string($this->db->sql_escape($search));
+                $search = $this->db->sql_escape($search);
                 $query = 'SELECT *
 					FROM ' . USERS_TABLE . '
 					WHERE ' . $this->db->sql_in_set('user_type', array(USER_NORMAL, USER_FOUNDER)) . '
-						AND LOWER(username_clean) ' . $this->db->sql_like_expression($this->db->get_any_char() . $search . $this->db->get_any_char()) . '
-					ORDER BY username_clean';
+						AND username_clean ' . $this->db->sql_like_expression($this->db->get_any_char() . $search . $this->db->get_any_char()) . '
+					ORDER BY username_clean ' . $this->db->sql_like_expression($search . $this->db->get_any_char()) . ' DESC, username DESC';
                 $result = $this->db->sql_query($query);
                 $phpbb_root_path = defined('PHPBB_ROOT_PATH') ? PHPBB_ROOT_PATH : './';
-                $default_avatar_url = $phpbb_root_path . '/styles/' . $this->user->style['style_path'] . '/theme/images/no_avatar.gif';
+                $default_avatar_url = $phpbb_root_path . 'styles/' . $this->user->style['style_path'] . '/theme/images/no_avatar.gif';
                 if (!file_exists($default_avatar_url))
                 {
-                    $default_avatar_url = $phpbb_root_path . '/ext/pcgf/pmnamesuggestions/styles/all/theme/images/no_avatar.gif';
+                    $default_avatar_url = $phpbb_root_path . 'ext/pcgf/pmnamesuggestions/styles/all/theme/images/no-avatar.gif';
                 }
                 // Get all users with pm read permission
                 while ($user = $this->db->sql_fetchrow($result))
