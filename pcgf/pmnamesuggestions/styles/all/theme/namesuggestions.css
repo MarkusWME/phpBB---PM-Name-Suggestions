@@ -30,8 +30,6 @@
 
 #pcgf_pmnamesuggestionlist > ul > li > img {
 	display: inline-block;
-	height: 20px;
 	margin-right: 10px;
 	vertical-align: middle;
-	width: 20px;
 }

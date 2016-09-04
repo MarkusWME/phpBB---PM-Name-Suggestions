@@ -60,8 +60,9 @@ class listener implements EventSubscriberInterface
     public function add_pmnamesuggestion_css($event)
     {
         $this->template->assign_vars(array(
-            'PM_NAME_SUGGESTIONS'         => true,
-            'PCGF_PM_NAME_SUGGESTION_URL' => $this->helper->route('pcgf_pmnamesuggestions_controller'),
+            'PM_NAME_SUGGESTIONS'                => true,
+            'PCGF_PM_NAME_SUGGESTION_URL'        => $this->helper->route('pcgf_pmnamesuggestions_controller'),
+            'PCGF_PM_NAME_SOGGESTION_IMAGE_SIZE' => 20,
         ));
     }
 }

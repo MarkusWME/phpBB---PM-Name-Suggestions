@@ -3,8 +3,8 @@
 	"type": "phpbb-extension",
 	"description": "An extension that suggests usernames when selecting a recipient of a private message",
 	"homepage": "https://github.com/MarkusWME/phpBB---PM-Name-Suggestions",
-	"version": "1.0.3",
-	"time": "2016-07-17",
+	"version": "1.0.4",
+	"time": "2016-09-05",
 	"keywords": ["pm", "private message", "recipient", "username", "suggestion"],
 	"license": "GPL-2.0",
 	"authors": [

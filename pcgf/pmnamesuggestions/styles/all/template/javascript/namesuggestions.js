@@ -171,6 +171,12 @@ pcgfUserList.on('keyup', function(e) {
                     if (pcgfResultCount > 0) {
                         // Show the result list and refresh it's position
                         pcgfSuggestionList.html(suggestions);
+                        pcgfSuggestionList.find('img').each(function() {
+                            $(this).css({
+                                width: pcgfPMNameSuggestionImageSize + 'px',
+                                height: pcgfPMNameSuggestionImageSize + 'px'
+                            });
+                        });
                         setSuggestionPosition();
                     } else {
                         pcgfLastSearchValue = '';
@@ -208,4 +214,8 @@ pcgfSuggestionList.on('click', function() {
         setPMName(pcgfSuggestionList.find('ul > li:nth-child(' + pcgfLastSelectedIndex + ')').find('.pcgf-pm-name-suggestion').val());
         pcgfUserList.focus();
     }
+});
+
+$(document).ready(function() {
+    $('#username_list').prop('autocomplete', 'off');
 });
