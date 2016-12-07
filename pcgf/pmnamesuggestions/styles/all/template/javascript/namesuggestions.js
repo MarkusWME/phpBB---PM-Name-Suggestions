@@ -13,15 +13,17 @@ function hideSuggestions() {
 }
 
 function setSuggestionPosition() {
-    // Position the suggestion list under the current line of the user list
-    var userListPosition = pcgfUserList.position();
-    var currentLine = pcgfUserList.val();
-    currentLine = currentLine.substr(0, pcgfUserList.prop('selectionStart')).split('\n').length;
-    pcgfSuggestionList.css({
-        display: 'inline-block',
-        left: userListPosition.left,
-        top: userListPosition.top + (currentLine * parseInt(pcgfUserList.css('line-height'))) + 5
-    });
+    if (pcgfResultCount > 0) {
+        // Position the suggestion list under the current line of the user list
+        var userListPosition = pcgfUserList.position();
+        var currentLine = pcgfUserList.val();
+        currentLine = currentLine.substr(0, pcgfUserList.prop('selectionStart')).split('\n').length;
+        pcgfSuggestionList.css({
+            display: 'inline-block',
+            left: userListPosition.left,
+            top: userListPosition.top + (currentLine * parseInt(pcgfUserList.css('line-height'))) + 5
+        });
+    }
 }
 
 function setPMName(name) {
@@ -138,6 +140,7 @@ pcgfUserList.on('keyup', function(e) {
     searchValue = searchValue.substr(startIndex, endIndex - startIndex);
     if (searchValue !== pcgfLastSearchValue) {
         pcgfLastSearchValue = searchValue;
+        //noinspection JSUnusedGlobalSymbols
         $.ajax({
             url: pcgfPMNameSuggestionURL, type: 'POST', data: {search: searchValue}, success: function(result) {
                 if (searchValue === pcgfLastSearchValue) {

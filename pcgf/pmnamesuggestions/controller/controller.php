@@ -28,25 +28,30 @@ class controller
     /** @var \phpbb\user $user User object */
     protected $user;
 
+    /** @var  string $phpbb_root_path The forum root path */
+    protected $phpbb_root_path;
+
     /**
      * Constructor
      *
      * @access public
      * @since  1.0.0
      *
-     * @param \phpbb\request\request\  $request Request object
-     * @param \phpbb\db\driver\factory $db      Database object
-     * @param \phpbb\auth\auth         $auth    Authenticator object
-     * @param \phpbb\user              $user    User object
+     * @param \phpbb\request\request\  $request         Request object
+     * @param \phpbb\db\driver\factory $db              Database object
+     * @param \phpbb\auth\auth         $auth            Authenticator object
+     * @param \phpbb\user              $user            User object
+     * @param  string                  $phpbb_root_path The forum root path
      *
      * @return \pcgf\pmnamesuggestions\controller\controller The controller object of the extension
      */
-    public function __construct(\phpbb\request\request $request, \phpbb\db\driver\factory $db, \phpbb\auth\auth $auth, \phpbb\user $user)
+    public function __construct(\phpbb\request\request $request, \phpbb\db\driver\factory $db, \phpbb\auth\auth $auth, \phpbb\user $user, $phpbb_root_path)
     {
         $this->request = $request;
         $this->db = $db;
         $this->auth = $auth;
         $this->user = $user;
+        $this->phpbb_root_path = $phpbb_root_path;
     }
 
     /**
@@ -75,11 +80,14 @@ class controller
 						AND username_clean ' . $this->db->sql_like_expression($this->db->get_any_char() . $search . $this->db->get_any_char()) . '
 					ORDER BY username_clean ' . $this->db->sql_like_expression($search . $this->db->get_any_char()) . ' DESC, username DESC';
                 $result = $this->db->sql_query($query);
-                $phpbb_root_path = defined('PHPBB_ROOT_PATH') ? PHPBB_ROOT_PATH : './';
-                $default_avatar_url = $phpbb_root_path . 'styles/' . $this->user->style['style_path'] . '/theme/images/no_avatar.gif';
+                $default_avatar_url = $this->phpbb_root_path . 'styles/' . $this->user->style['style_path'] . '/theme/images/no_avatar.gif';
                 if (!file_exists($default_avatar_url))
                 {
-                    $default_avatar_url = $phpbb_root_path . 'ext/pcgf/pmnamesuggestions/styles/all/theme/images/no-avatar.gif';
+                    $default_avatar_url = $this->phpbb_root_path . 'ext/pcgf/pmnamesuggestions/styles/all/theme/images/no-avatar.gif';
+                }
+                if (!defined('PHPBB_USE_BOARD_URL_PATH'))
+                {
+                    define('PHPBB_USE_BOARD_URL_PATH', true);
                 }
                 // Get all users with pm read permission
                 while ($user = $this->db->sql_fetchrow($result))

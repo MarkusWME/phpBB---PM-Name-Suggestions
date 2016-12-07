@@ -13,3 +13,4 @@ services:
             - @dbal.conn
             - @auth
             - @user
+            - %core.root_path%
