@@ -14,6 +14,10 @@ A phpBB extension that suggests usernames when selecting a recipient of a privat
 * prosilver
 * [Mobbern3.1](http://www.masivotech.com/product/mobbern-phpbb3-phpbb31-responsive-theme/ "Mobbern phpBB responsive theme website")
 
+## Supported languages
+* Deutsch
+* English
+
 ## How to install
 To install the extension you have to do the following steps:
 
