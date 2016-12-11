@@ -10,7 +10,7 @@ namespace pcgf\pmnamesuggestions\event;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-/** @version 1.0.0 */
+/** @version 1.1.0 */
 class listener implements EventSubscriberInterface
 {
     /** @var \phpbb\template\template $template Template object */
@@ -18,6 +18,9 @@ class listener implements EventSubscriberInterface
 
     /** @var \phpbb\controller\helper $helper Helper object */
     protected $helper;
+
+    /** @var  \phpbb\config\config $config Configuration object */
+    protected $config;
 
     /**
      * Constructor
@@ -27,13 +30,15 @@ class listener implements EventSubscriberInterface
      *
      * @param \phpbb\template\template $template Template object
      * @param \phpbb\controller\helper $helper   Helper object
+     * @param \phpbb\config\config     $config   Configuration object
      *
      * @return \pcgf\pmnamesuggestions\event\listener The listener object of the extension
      */
-    public function __construct(\phpbb\template\template $template, \phpbb\controller\helper $helper)
+    public function __construct(\phpbb\template\template $template, \phpbb\controller\helper $helper, \phpbb\config\config $config)
     {
         $this->template = $template;
         $this->helper = $helper;
+        $this->config = $config;
     }
 
     /**
@@ -62,7 +67,7 @@ class listener implements EventSubscriberInterface
         $this->template->assign_vars(array(
             'PM_NAME_SUGGESTIONS'                => true,
             'PCGF_PM_NAME_SUGGESTION_URL'        => $this->helper->route('pcgf_pmnamesuggestions_controller'),
-            'PCGF_PM_NAME_SOGGESTION_IMAGE_SIZE' => 20,
+            'PCGF_PM_NAME_SOGGESTION_IMAGE_SIZE' => $this->config['pcgf_pmnamesuggestions_avatar_image_size'],
         ));
     }
 }

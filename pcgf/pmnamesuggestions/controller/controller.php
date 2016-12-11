@@ -10,12 +10,9 @@ namespace pcgf\pmnamesuggestions\controller;
 
 use Symfony\Component\HttpFoundation\Response;
 
-/** @version 1.0.0 */
+/** @version 1.1.0 */
 class controller
 {
-    /** @const Max user count */
-    const MAX_USER_COUNT = 5;
-
     /** @var \phpbb\request\request $request Request object */
     protected $request;
 
@@ -27,6 +24,9 @@ class controller
 
     /** @var \phpbb\user $user User object */
     protected $user;
+
+    /** @var  \phpbb\config\config $config Configuration object */
+    protected $config;
 
     /** @var  string $phpbb_root_path The forum root path */
     protected $phpbb_root_path;
@@ -41,16 +41,18 @@ class controller
      * @param \phpbb\db\driver\factory $db              Database object
      * @param \phpbb\auth\auth         $auth            Authenticator object
      * @param \phpbb\user              $user            User object
+     * @param \phpbb\config\config     $config          Configuration object
      * @param  string                  $phpbb_root_path The forum root path
      *
      * @return \pcgf\pmnamesuggestions\controller\controller The controller object of the extension
      */
-    public function __construct(\phpbb\request\request $request, \phpbb\db\driver\factory $db, \phpbb\auth\auth $auth, \phpbb\user $user, $phpbb_root_path)
+    public function __construct(\phpbb\request\request $request, \phpbb\db\driver\factory $db, \phpbb\auth\auth $auth, \phpbb\user $user, \phpbb\config\config $config, $phpbb_root_path)
     {
         $this->request = $request;
         $this->db = $db;
         $this->auth = $auth;
         $this->user = $user;
+        $this->config = $config;
         $this->phpbb_root_path = $phpbb_root_path;
     }
 
@@ -103,7 +105,7 @@ class controller
                         }
                         array_push($users, array('username' => $user['username'], 'user' => get_username_string('no_profile', $user['user_id'], $user['username'], $user['user_colour']), 'avatar' => $avatar_image));
                         $user_count++;
-                        if ($user_count == self::MAX_USER_COUNT)
+                        if ($user_count == $this->config['pcgf_pmnamesuggestions_user_count'])
                         {
                             break;
                         }

@@ -4,6 +4,7 @@ services:
         arguments:
             - @template
             - @controller.helper
+            - @config
         tags:
             - { name: event.listener }
     pcgf.pmnamesuggestions.controller:
@@ -13,4 +14,5 @@ services:
             - @dbal.conn
             - @auth
             - @user
+            - @config
             - %core.root_path%
