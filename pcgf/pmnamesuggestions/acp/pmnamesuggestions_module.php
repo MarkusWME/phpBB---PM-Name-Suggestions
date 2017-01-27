@@ -27,9 +27,7 @@ class pmnamesuggestions_module
      * @since  1.1.0
      *
      * @param int    $id   The module id
-     * @param string $mode The mode the module is beeing called with
-     *
-     * @return null
+     * @param string $mode The mode the module is being called with
      */
     public function main($id, $mode)
     {

@@ -8,24 +8,29 @@
 
 namespace pcgf\pmnamesuggestions\controller;
 
-use Symfony\Component\HttpFoundation\Response;
+use phpbb\auth\auth;
+use phpbb\config\config;
+use phpbb\db\driver\factory;
+use phpbb\json_response;
+use phpbb\request\request;
+use phpbb\user;
 
-/** @version 1.1.0 */
+/** @version 1.1.1 */
 class controller
 {
-    /** @var \phpbb\request\request $request Request object */
+    /** @var request $request Request object */
     protected $request;
 
-    /** @var \phpbb\db\driver\factory $db Database object */
+    /** @var factory $db Database object */
     protected $db;
 
-    /** @var \phpbb\auth\auth $auth Authenticator object */
+    /** @var auth $auth Authenticator object */
     protected $auth;
 
-    /** @var \phpbb\user $user User object */
+    /** @var user $user User object */
     protected $user;
 
-    /** @var  \phpbb\config\config $config Configuration object */
+    /** @var  config $config Configuration object */
     protected $config;
 
     /** @var  string $phpbb_root_path The forum root path */
@@ -37,16 +42,14 @@ class controller
      * @access public
      * @since  1.0.0
      *
-     * @param \phpbb\request\request\  $request         Request object
-     * @param \phpbb\db\driver\factory $db              Database object
-     * @param \phpbb\auth\auth         $auth            Authenticator object
-     * @param \phpbb\user              $user            User object
-     * @param \phpbb\config\config     $config          Configuration object
-     * @param  string                  $phpbb_root_path The forum root path
-     *
-     * @return \pcgf\pmnamesuggestions\controller\controller The controller object of the extension
+     * @param request $request         Request object
+     * @param factory $db              Database object
+     * @param auth    $auth            Authenticator object
+     * @param user    $user            User object
+     * @param config  $config          Configuration object
+     * @param string  $phpbb_root_path The forum root path
      */
-    public function __construct(\phpbb\request\request $request, \phpbb\db\driver\factory $db, \phpbb\auth\auth $auth, \phpbb\user $user, \phpbb\config\config $config, $phpbb_root_path)
+    public function __construct(request $request, factory $db, auth $auth, user $user, config $config, $phpbb_root_path)
     {
         $this->request = $request;
         $this->db = $db;
@@ -61,11 +64,10 @@ class controller
      *
      * @access public
      * @since  1.0.0
-     * @return null
      */
     public function getNameSuggestions()
     {
-        $response = new \phpbb\json_response();
+        $response = new json_response();
         $users = array();
         // Only allow JSON requests
         if ($this->request->is_ajax())

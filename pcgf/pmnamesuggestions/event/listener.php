@@ -8,18 +8,21 @@
 
 namespace pcgf\pmnamesuggestions\event;
 
+use phpbb\config\config;
+use phpbb\controller\helper;
+use phpbb\template\template;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-/** @version 1.1.0 */
+/** @version 1.1.1 */
 class listener implements EventSubscriberInterface
 {
-    /** @var \phpbb\template\template $template Template object */
+    /** @var template $template Template object */
     protected $template;
 
-    /** @var \phpbb\controller\helper $helper Helper object */
+    /** @var helper $helper Helper object */
     protected $helper;
 
-    /** @var  \phpbb\config\config $config Configuration object */
+    /** @var config $config Configuration object */
     protected $config;
 
     /**
@@ -28,13 +31,11 @@ class listener implements EventSubscriberInterface
      * @access public
      * @since  1.0.0
      *
-     * @param \phpbb\template\template $template Template object
-     * @param \phpbb\controller\helper $helper   Helper object
-     * @param \phpbb\config\config     $config   Configuration object
-     *
-     * @return \pcgf\pmnamesuggestions\event\listener The listener object of the extension
+     * @param template $template Template object
+     * @param helper   $helper   Helper object
+     * @param config   $config   Configuration object
      */
-    public function __construct(\phpbb\template\template $template, \phpbb\controller\helper $helper, \phpbb\config\config $config)
+    public function __construct(template $template, helper $helper, config $config)
     {
         $this->template = $template;
         $this->helper = $helper;
@@ -60,14 +61,13 @@ class listener implements EventSubscriberInterface
      *
      * @access public
      * @since  1.0.0
-     * @return null
      */
-    public function add_pmnamesuggestion_css($event)
+    public function add_pmnamesuggestion_css()
     {
         $this->template->assign_vars(array(
             'PM_NAME_SUGGESTIONS'                => true,
             'PCGF_PM_NAME_SUGGESTION_URL'        => $this->helper->route('pcgf_pmnamesuggestions_controller'),
-            'PCGF_PM_NAME_SOGGESTION_IMAGE_SIZE' => $this->config['pcgf_pmnamesuggestions_avatar_image_size'],
+            'PCGF_PM_NAME_SUGGESTION_IMAGE_SIZE' => $this->config['pcgf_pmnamesuggestions_avatar_image_size'],
         ));
     }
 }

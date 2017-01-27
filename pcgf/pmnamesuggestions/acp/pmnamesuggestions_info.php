@@ -8,7 +8,7 @@
 
 namespace pcgf\pmnamesuggestions\acp;
 
-/** @version 1.1.0 */
+/** @version 1.1.1 */
 class pmnamesuggestions_info
 {
     /**
@@ -23,7 +23,6 @@ class pmnamesuggestions_info
         return array(
             'filename' => '\pcgf\pmnamesuggestions\acp\pmnamesuggestions_module',
             'title'    => 'ACP_PCGF_PMNAMESUGGESTIONS',
-            'version'  => '1.1.0',
             'modes'    => array(
                 'settings' => array(
                     'title' => 'ACP_PCGF_PMNAMESUGGESTIONS',
