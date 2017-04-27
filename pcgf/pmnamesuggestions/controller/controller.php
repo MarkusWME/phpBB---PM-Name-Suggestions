@@ -73,7 +73,7 @@ class controller
         if ($this->request->is_ajax())
         {
             // Search if a name is given
-            $search = utf8_normalize_nfc(strtolower($this->request->variable('search', '', true)));
+            $search = strtolower($this->request->variable('search', '', true));
             if (strlen($search) > 0)
             {
                 $user_count = 0;
